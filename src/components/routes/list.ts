@@ -1,4 +1,4 @@
-import { Login, NotFound, SignUp, UserPage } from "../pages";
+import { Login, NotFound, Signup, UserPage } from "../pages";
 
 export const routes = [
   {
@@ -13,7 +13,7 @@ export const routes = [
   },
   {
     path: '/signup',
-    element: SignUp,
+    element: Signup,
     auth: false,
   },
   {

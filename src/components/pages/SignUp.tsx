@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-const SignUp = () => {
+const SignUp: FC = () => {
   return (
     <div>
       <h1>Sign Up</h1>

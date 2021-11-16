@@ -1,20 +1,15 @@
-import { Home, Login, NotFound, SignUp, UserPage } from "../pages";
+import { Login, NotFound, SignUp, UserPage } from "../pages";
 
 export const routes = [
   {
     path: '/',
-    element: Home,
+    element: Login,
     auth: false,
   },
   {
     path: '/user/:id',
     element: UserPage,
     auth: true,
-  },
-  {
-    path: '/login',
-    element: Login,
-    auth: false,
   },
   {
     path: '/signup',

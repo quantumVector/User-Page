@@ -1,0 +1,26 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #2d2b34;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.links a {
+  text-decoration: none;
+  font-size: 20px;
+  color: #fff;
+}
+
+.links a:first-child {
+  margin-right: 20px;
+}
+
+.active {
+  color: red !important;
+}

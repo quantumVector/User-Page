@@ -20,3 +20,7 @@ code {
   margin: 0 auto;
   width: 1000px;
 }
+
+.container h1 {
+  text-align: center;
+}

@@ -4,6 +4,7 @@ import { Alert, Button, Grid, TextField, Box } from '@mui/material';
 const Signup: FC = () => {
   return (
     <>
+      <h1>Sign up</h1>
       {false && (
         <Alert severity='error' style={{ marginTop: 20 }}>
           {'error'}

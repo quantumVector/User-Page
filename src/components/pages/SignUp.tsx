@@ -1,7 +1,8 @@
-import React, { FC, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { FC, useEffect, useState } from 'react';
 import { Grid, Alert } from '@mui/material';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
-import { ConfirmPasswordField, EmailField,/*  FullNameField, */ PasswordField, SubmitButton } from '../formContoller/FormController';
+import { ConfirmPasswordField, EmailField, PasswordField, SubmitButton } from '../formContoller/FormController';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signupFormSchema } from '../../utils/validators';
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -16,15 +17,19 @@ export interface IFormInputs {
 };
 
 const Signup: FC = () => {
-  const { auth } = useAuth();
+  const { auth, user } = useAuth();
   const methods = useForm<IFormInputs>({
     resolver: yupResolver(signupFormSchema),
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (user) navigate(`/user/${user.id}`);
+  }, [user]);
+
   const formSubmitHandler: SubmitHandler<IFormInputs> = async (data: IFormInputs) => {
-    createUserWithEmailAndPassword(auth, data.email, data.password)
+    await createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
         navigate(`/user/${user.uid}`);

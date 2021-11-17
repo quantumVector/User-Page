@@ -1,11 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Auth, getAuth, onAuthStateChanged } from '@firebase/auth';
 import React, { createContext, FC, useState, Dispatch, SetStateAction, useEffect, useMemo } from 'react';
-import avatar from '../../assets/ness.png'
 
 interface IUser {
-  _id: string,
-  avatar: string | null,
+  id: string,
   name: string | null,
   email: string | null,
 }
@@ -28,8 +26,7 @@ export const AuthProvider: FC = ({ children }) => {
   useEffect(() => {
     const unListen = onAuthStateChanged(auth, authUser => {
       setUser(authUser ? {
-        _id: authUser.uid,
-        avatar: avatar,
+        id: authUser.uid,
         name: '',
         email: authUser.email,
       } : null)

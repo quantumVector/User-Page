@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { FC, useEffect, useState } from 'react';
 import { Grid, Alert } from '@mui/material';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { EmailField, PasswordField, SubmitButton } from '../formContoller/FormController';
@@ -13,12 +14,16 @@ export interface IFormInputs {
 };
 
 const Login: FC = () => {
-  const { auth } = useAuth();
+  const { auth, user } = useAuth();
   const methods = useForm<IFormInputs>({
     resolver: yupResolver(loginFormSchema),
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) navigate(`/user/${user.id}`);
+  }, [user]);
 
   const formSubmitHandler: SubmitHandler<IFormInputs> = (data: IFormInputs) => {
     signInWithEmailAndPassword(auth, data.email, data.password)

@@ -5,7 +5,7 @@ import './index.css';
 import * as firebase from 'firebase/app';
 import AppRoutes from './components/routes/Routes';
 import { BrowserRouter } from 'react-router-dom';
-/* import { AuthProvider } from './components/providers/AuthProvider' */
+import { AuthProvider } from './components/providers/AuthProvider';
 
 firebase.initializeApp({
   apiKey: "AIzaSyDCpry19k3lALtiix4kQ3I4zzijM3LW14o",
@@ -20,7 +20,9 @@ firebase.initializeApp({
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AppRoutes />
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

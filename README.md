@@ -1,4 +1,4 @@
-Страница пользователя - **User-Page*
+Страница пользователя - **User-Page**
 
 https://quantumvector.github.io/User-Page/
 

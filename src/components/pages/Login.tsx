@@ -1,62 +1,34 @@
-import React, { FC, SyntheticEvent, useState } from 'react';
-import { Alert, Button, Grid, TextField, Box } from '@mui/material';
-export interface IUserData {
+import React, { FC } from 'react';
+import { Grid } from '@mui/material';
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { EmailField, PasswordField, SubmitButton } from '../formContoller/FormController';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loginFormSchema } from '../../utils/validators';
+export interface IFormInputs {
   email: string,
   password: string,
 };
 
 const Login: FC = () => {
-  const [userData, setUserData] = useState<IUserData>({
-    email: '',
-    password: '',
-  } as IUserData);
+  const methods = useForm<IFormInputs>({
+    resolver: yupResolver(loginFormSchema),
+  });
 
-  const handleLogin = (e: SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    console.log(userData.email)
-    console.log(userData.password)
-  };
-
+  const formSubmitHandler: SubmitHandler<IFormInputs> = (data: IFormInputs) => {
+    console.log('form data is: ', data);
+  }
 
   return (
     <>
       <h1>Login</h1>
-      {false && (
-        <Alert severity='error' style={{ marginTop: 20 }}>
-          {'error'}
-        </Alert>
-      )}
       <Grid display='flex' justifyContent='center' alignItems='center' height=''>
-        <form onSubmit={handleLogin}>
-          <TextField
-            type='email'
-            label='Email'
-            variant='outlined'
-            fullWidth
-            sx={{ display: 'block', marginTop: 3, marginBottom: 3, width: 400 }}
-            onChange={e => setUserData({ ...userData, email: e.target.value })}
-            required
-          />
-          <TextField
-            type='password'
-            label='Password'
-            variant='outlined'
-            fullWidth
-            sx={{ display: 'block', marginBottom: 3, width: 400 }}
-            onChange={e => setUserData({ ...userData, password: e.target.value })}
-            required
-          />
-          <Box textAlign='center'>
-            <Button
-              type='submit'
-              variant='outlined'
-              size="large"
-            >
-              Login
-            </Button>
-          </Box>
-        </form>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(formSubmitHandler)}>
+            <EmailField />
+            <PasswordField />
+            <SubmitButton text='Login' />
+          </form>
+        </FormProvider >
       </Grid>
     </>
   )

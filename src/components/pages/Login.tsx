@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, useEffect, useState } from 'react';
-import { Grid, Alert } from '@mui/material';
+import { Grid, Alert, Box } from '@mui/material';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { EmailField, PasswordField, SubmitButton } from '../formContoller/FormController';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginFormSchema } from '../../utils/validators';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from '../providers/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 export interface IFormInputs {
   email: string,
   password: string,
@@ -55,6 +55,9 @@ const Login: FC = () => {
             <EmailField />
             <PasswordField />
             <SubmitButton text='Login' />
+            <Box sx={{ textAlign: 'center', marginTop: 2 }}>
+              <div>Don't have an account? <Link to="/signup">Sign up</Link></div>
+            </Box>
           </form>
         </FormProvider >
       </Grid>

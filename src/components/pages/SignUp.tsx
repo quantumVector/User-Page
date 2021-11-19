@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, useEffect, useState } from 'react';
-import { Grid, Alert } from '@mui/material';
+import { Grid, Alert, Box } from '@mui/material';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { ConfirmPasswordField, EmailField, PasswordField, SubmitButton } from '../formContoller/FormController';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signupFormSchema } from '../../utils/validators';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from '../providers/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export interface IFormInputs {
   fullName: string,
@@ -59,6 +59,9 @@ const Signup: FC = () => {
             <PasswordField />
             <ConfirmPasswordField />
             <SubmitButton text='Sign up' />
+            <Box sx={{ textAlign: 'center', marginTop: 2 }}>
+              <div>Already have an account?  <Link to="/">Log in</Link></div>
+            </Box>
           </form>
         </FormProvider >
       </Grid>

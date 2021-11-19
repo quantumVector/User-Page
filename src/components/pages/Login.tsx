@@ -49,7 +49,7 @@ const Login: FC = () => {
         </Alert>
       )}
       <h1>Login</h1>
-      <Grid display='flex' justifyContent='center' alignItems='center' height=''>
+      <Grid display='flex' justifyContent='center' alignItems='center'>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(formSubmitHandler)}>
             <EmailField />

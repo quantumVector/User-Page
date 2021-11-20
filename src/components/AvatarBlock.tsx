@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar } from '@mui/material';
-import defaultAvatar from '../../../assets/avatar-default-icon.png';
+import defaultAvatar from '../assets/avatar-default-icon.png';
 
 const AvatarBlock = () => {
   return (

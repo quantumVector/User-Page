@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useAuth } from '../../providers/useAuth';
 import { Alert, Button, TextField } from '@mui/material';
 import { updateEmail } from "firebase/auth";
-import classes from './UserPage.module.css'
+import classes from '../styles/EmailBlock.module.css';
+import { useAuth } from '../hooks/useAuth';
 
 const EmailBlock: FC = () => {
   const { auth, user } = useAuth();

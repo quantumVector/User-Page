@@ -1,8 +1,7 @@
 import React, { FC, useState } from 'react';
-import { useAuth } from '../../providers/useAuth';
 import { Alert, Button, TextField } from '@mui/material';
 import { updatePassword } from "firebase/auth";
-import classes from './UserPage.module.css'
+import { useAuth } from '../hooks/useAuth';
 
 const PasswordBlock: FC = () => {
   const { auth } = useAuth();
@@ -56,7 +55,7 @@ const PasswordBlock: FC = () => {
           variant="contained">Change password</Button>}
 
       {passwordEditMod &&
-        <div className={classes.item}>
+        <div>
           <TextField label="Enter new password"
             type="password"
             variant="standard"

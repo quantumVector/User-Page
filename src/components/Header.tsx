@@ -1,21 +1,14 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import classes from './Header.module.css';
-import { useAuth } from '../../providers/useAuth';
-import { signOut } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+import classes from '../styles/Header.module.css';
 import { Button } from '@mui/material';
+import { useAuth } from '../hooks/useAuth';
 
 const Header: FC = () => {
-  const { auth, user } = useAuth();
-  const navigate = useNavigate();
+  const { user, signout } = useAuth();
 
   const onLogOut = () => {
-    signOut(auth).then(() => {
-      navigate('/');
-    }).catch((error) => {
-      console.log('faild', error)
-    });
+    signout();
   }
 
   return (

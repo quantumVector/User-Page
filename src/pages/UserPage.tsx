@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import classes from './UserPage.module.css'
-import EmailBlock from './EmailBlock';
-import PasswordBlock from './PasswordBlock';
-import AvatarBlock from './AvatarBlock';
+import AvatarBlock from '../components/AvatarBlock';
+import EmailBlock from '../components/EmailBlock';
+import PasswordBlock from '../components/PasswordBlock';
+import classes from '../styles/UserPage.module.css';
 
 const UserPage: FC = () => {
   return (

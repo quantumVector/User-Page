@@ -1,0 +1,8 @@
+.email {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  min-width: 350px;
+  font-size: 25px;
+}

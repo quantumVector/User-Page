@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Grid, Alert, Box } from '@mui/material';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
-import { ConfirmPasswordField, EmailField, PasswordField, SubmitButton } from '../formContoller/FormController';
+import { ConfirmPasswordField, EmailField, PasswordField, SubmitButton } from '../components/FormController';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signupFormSchema } from '../../utils/validators';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from '../providers/useAuth';
-import { Link, useNavigate } from 'react-router-dom';
+import { signupFormSchema } from '../utils/validators';
+import { Link, Navigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 export interface IFormInputs {
   fullName: string,
@@ -17,41 +16,28 @@ export interface IFormInputs {
 };
 
 const Signup: FC = () => {
-  const { auth, user } = useAuth();
+  const { user, signup } = useAuth();
   const methods = useForm<IFormInputs>({
     resolver: yupResolver(signupFormSchema),
   });
   const [error, setError] = useState('');
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) navigate(`/user/${user.id}`);
-  }, [user]);
 
   const formSubmitHandler: SubmitHandler<IFormInputs> = async (data: IFormInputs) => {
-    await createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        navigate(`/user/${user.uid}`);
-      })
-      .catch((error) => {
-        let customError: string = '';
-
-        if (error.code === 'auth/email-already-in-use')
-          customError = 'This email address has already been registered.';
-
-        setError(customError || error.message);
+    signup(data.email, data.password)
+      .then((message: string) => {
+        if (message !== 'success') setError(message);
       });
   }
 
   return (
     <>
+      {user && <Navigate to={`/user/${user.id}`} />}
+      <h1>Sign up</h1>
       {error && (
         <Alert severity='error' style={{ margin: 20 }}>
           {error}
         </Alert>
       )}
-      <h1>Sign up</h1>
       <Grid display='flex' justifyContent='center' alignItems='center'>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(formSubmitHandler)}>

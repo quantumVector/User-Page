@@ -1,26 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { TextField, Button, Box } from '@mui/material';
 
-export const FullNameField = () => {
-  const { control, formState: { errors } } = useFormContext();
-
-  return <Controller name='fullName' control={control} defaultValue=''
-    render={({ field }) => (
-      <TextField
-        {...field}
-        label='Full Name'
-        variant='outlined'
-        fullWidth
-        sx={{ display: 'block', marginTop: 3, marginBottom: 3, width: 400 }}
-        error={!!errors.fullName}
-        helperText={errors.fullName ? errors.fullName?.message : ''}
-      />
-    )}
-  />
-}
-
-export const EmailField = () => {
+export const EmailField: FC = () => {
   const { control, formState: { errors } } = useFormContext();
 
   return <Controller name='email' control={control} defaultValue=''
@@ -38,7 +20,7 @@ export const EmailField = () => {
   />
 }
 
-export const PasswordField = () => {
+export const PasswordField: FC = () => {
   const { control, formState: { errors } } = useFormContext();
 
   return <Controller name='password' control={control} defaultValue=''
@@ -57,7 +39,7 @@ export const PasswordField = () => {
   />
 }
 
-export const ConfirmPasswordField = () => {
+export const ConfirmPasswordField: FC = () => {
   const { control, formState: { errors } } = useFormContext();
 
   return <Controller name='confirmPassword' control={control} defaultValue=''

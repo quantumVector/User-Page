@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Avatar } from '@mui/material';
 import defaultAvatar from '../assets/avatar-default-icon.png';
 
-const AvatarBlock = () => {
+const AvatarBlock: FC = () => {
   return (
     <Avatar src={defaultAvatar} sx={{ width: 300, height: 300 }}></Avatar>
   )

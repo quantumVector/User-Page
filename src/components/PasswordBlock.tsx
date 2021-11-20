@@ -11,29 +11,25 @@ const PasswordBlock: FC = () => {
   const [success, setSuccess] = useState('');
 
   const onUpdatePassword = () => {
-    let customError: string = '';
-
-    if (passwordValue.length < 8) {
-      customError = 'Password must be at least 8 characters.';
-      setError(customError);
-    }
-
     if (auth.currentUser) {
       updatePassword(auth.currentUser, passwordValue).then(() => {
         setSuccess('Password change was successful!');
         setError('');
       }).catch((error) => {
-        if (error.code === 'auth/requires-recent-login')
-          customError = 'You need to log into your account AGAIN to change your password.';
-
-        setError(customError || error.message);
-        setSuccess('');
+        error.code === 'auth/requires-recent-login'
+          ? setError('You need to log into your account AGAIN to change your password.')
+          : setError(error.message);
       });
     }
   }
 
   const saveNewPassword = () => {
-    onUpdatePassword();
+    if (passwordValue && passwordValue.length >= 8) {
+      onUpdatePassword();
+    } else {
+      setError('Password must be at least 8 characters.');
+    }
+
     setPasswordEditMode(false);
     setPasswordValue('');
   }
@@ -51,7 +47,11 @@ const PasswordBlock: FC = () => {
         </Alert>
       )}
       {!passwordEditMod &&
-        <Button onClick={() => setPasswordEditMode(true)} size="small"
+        <Button onClick={() => {
+          setPasswordEditMode(true);
+          setError('');
+          setSuccess('');
+        }} size="small"
           variant="contained">Change password</Button>}
 
       {passwordEditMod &&

@@ -11,7 +11,6 @@ const EmailBlock: FC = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-
   useEffect(() => {
     if (user?.email) setEmailValue(user.email);
   }, [user]);
@@ -22,23 +21,31 @@ const EmailBlock: FC = () => {
         setSuccess('Email change was successful!');
         setError('');
       }).catch((error) => {
-        let customError: string = '';
-
-        if (error.code === 'auth/requires-recent-login')
-          customError = 'You need to log into your account AGAIN to change your mail.';
-        if (error.code === 'auth/invalid-email')
-          customError = 'Please enter a valid email.';
-
-        setError(customError || error.message);
+        switch (error.code) {
+          case 'auth/requires-recent-login':
+            setError('You need to log into your account AGAIN to change your mail.');
+            break;
+          case 'auth/invalid-email':
+            setError('Please enter a valid email.');
+            break;
+          default:
+            setError(error.message);
+        }
         setSuccess('');
-
         if (user?.email) setEmailValue(user.email);
       });
     }
   }
 
   const saveNewEmail = () => {
-    onUpdateEmail();
+    if (emailValue) {
+      onUpdateEmail();
+    } else {
+      setError('Empty string is invalid.');
+      setSuccess('');
+      if (user?.email) setEmailValue(user?.email);
+    }
+
     setEmailEditMode(false);
   }
 
@@ -57,7 +64,11 @@ const EmailBlock: FC = () => {
       {!emailEditMod &&
         <div className={classes.email}>
           <div>{emailValue}</div>
-          <Button onClick={() => setEmailEditMode(true)} size="small"
+          <Button onClick={() => {
+            setEmailEditMode(true);
+            setEmailValue('');
+            setError('');
+          }} size="small"
             variant="contained" sx={{ marginLeft: 2 }}>Change email</Button>
         </div>}
 
@@ -69,11 +80,15 @@ const EmailBlock: FC = () => {
           />
           <Button onClick={saveNewEmail} size="small"
             variant="contained" sx={{ marginLeft: 2 }}>Save</Button>
-          <Button onClick={() => setEmailEditMode(false)}
+          <Button onClick={() => {
+            setEmailEditMode(false);
+            if (user?.email) setEmailValue(user?.email);
+            setError('');
+          }}
             size="small" variant="contained" sx={{ marginLeft: 2 }}>Canсel</Button>
         </div>}
     </>
   )
 }
 
-export default EmailBlock
+export default EmailBlock;

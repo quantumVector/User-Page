@@ -12,7 +12,7 @@ export const EmailField: FC = () => {
         label='Email'
         variant='outlined'
         fullWidth
-        sx={{ display: 'block', marginTop: 3, marginBottom: 3, width: 400 }}
+        sx={{ display: 'block', marginTop: 3, marginBottom: 3, width: 350 }}
         error={!!errors.email}
         helperText={errors.email ? errors.email?.message : ''}
       />
@@ -31,7 +31,7 @@ export const PasswordField: FC = () => {
         label='Password'
         variant='outlined'
         fullWidth
-        sx={{ display: 'block', marginTop: 3, marginBottom: 3, width: 400 }}
+        sx={{ display: 'block', marginTop: 3, marginBottom: 3, width: 350 }}
         error={!!errors.password}
         helperText={errors.password ? errors.password?.message : ''}
       />
@@ -50,7 +50,7 @@ export const ConfirmPasswordField: FC = () => {
         label='Confirm password'
         variant='outlined'
         fullWidth
-        sx={{ display: 'block', marginTop: 3, marginBottom: 3, width: 400 }}
+        sx={{ display: 'block', marginTop: 3, marginBottom: 3, width: 350 }}
         error={!!errors.confirmPassword}
         helperText={errors.confirmPassword ? errors.confirmPassword?.message : ''}
       />

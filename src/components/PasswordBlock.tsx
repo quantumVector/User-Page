@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Alert, Button, TextField } from '@mui/material';
+import { Alert, Button, TextField, Box } from '@mui/material';
 import { updatePassword } from "firebase/auth";
 import { useAuth } from '../hooks/useAuth';
 
@@ -37,35 +37,48 @@ const PasswordBlock: FC = () => {
   return (
     <>
       {error && (
-        <Alert severity='error' style={{ margin: 20 }}>
+        <Alert severity='error' style={{ margin: '20px 0', maxWidth: '300px' }}>
           {error}
         </Alert>
       )}
       {success && (
-        <Alert severity='success' style={{ margin: 20 }}>
+        <Alert severity='success' style={{ margin: '20px 0', maxWidth: '300px' }}>
           {success}
         </Alert>
       )}
       {!passwordEditMod &&
-        <Button onClick={() => {
-          setPasswordEditMode(true);
-          setError('');
-          setSuccess('');
-        }} size="small"
-          variant="contained">Change password</Button>}
+        <Box display='flex' justifyContent='space-between' alignItems='center'
+          sx={{ width: '100%', height: 50, marginBottom: 2 }}>
+          <TextField
+            disabled
+            type='password'
+            defaultValue='111111111111111111111111111'
+            variant="standard"
+            sx={{ width: '176px' }}
+          />
+          <Button onClick={() => {
+            setPasswordEditMode(true);
+            setError('');
+            setSuccess('');
+          }} size="small"
+            variant="contained"
+            sx={{ marginLeft: 2 }}>Change password</Button>
+        </Box>}
 
       {passwordEditMod &&
-        <div>
+        <Box display='flex' justifyContent='space-between' alignItems='center'
+          sx={{ width: '100%', height: 50, marginBottom: 2 }}>
           <TextField label="Enter new password"
             type="password"
             variant="standard"
             onChange={(e) => setPasswordValue(e.target.value)}
           />
           <Button onClick={saveNewPassword} size="small"
-            variant="contained">Save</Button>
+            variant="contained"
+            sx={{ marginLeft: 2 }}>Save</Button>
           <Button onClick={() => setPasswordEditMode(false)}
-            size="small" variant="contained" sx={{ marginLeft: 2 }}>Canсel</Button>
-        </div>}
+            size="small" variant="contained" sx={{ marginLeft: 1 }}>Canсel</Button>
+        </Box>}
     </>
   )
 }

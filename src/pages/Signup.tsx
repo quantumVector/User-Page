@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { FC, useState } from 'react';
-import { Grid, Alert, Box } from '@mui/material';
+import { Alert, Box } from '@mui/material';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
 import { ConfirmPasswordField, EmailField, PasswordField, SubmitButton } from '../components/FormController';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -38,19 +38,17 @@ const Signup: FC = () => {
           {error}
         </Alert>
       )}
-      <Grid display='flex' justifyContent='center' alignItems='center'>
-        <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(formSubmitHandler)}>
-            <EmailField />
-            <PasswordField />
-            <ConfirmPasswordField />
-            <SubmitButton text='Sign up' />
-            <Box sx={{ textAlign: 'center', marginTop: 2 }}>
-              <div>Already have an account?  <Link to="/">Log in</Link></div>
-            </Box>
-          </form>
-        </FormProvider >
-      </Grid>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(formSubmitHandler)}>
+          <EmailField />
+          <PasswordField />
+          <ConfirmPasswordField />
+          <SubmitButton text='Sign up' />
+          <Box sx={{ textAlign: 'center', marginTop: 2 }}>
+            <div>Already have an account?  <Link to="/">Log in</Link></div>
+          </Box>
+        </form>
+      </FormProvider >
     </>
   )
 }

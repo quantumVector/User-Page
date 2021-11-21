@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Alert, Button, TextField } from '@mui/material';
+import { Alert, Button, TextField, Box } from '@mui/material';
 import { updateEmail } from "firebase/auth";
-import classes from '../styles/EmailBlock.module.css';
 import { useAuth } from '../hooks/useAuth';
 
 const EmailBlock: FC = () => {
@@ -52,28 +51,36 @@ const EmailBlock: FC = () => {
   return (
     <>
       {error && (
-        <Alert severity='error' style={{ margin: 20 }}>
+        <Alert severity='error' style={{ margin: '20px 0', maxWidth: '300px' }}>
           {error}
         </Alert>
       )}
       {success && (
-        <Alert severity='success' style={{ margin: 20 }}>
+        <Alert severity='success' style={{ margin: '20px 0', maxWidth: '300px' }}>
           {success}
         </Alert>
       )}
       {!emailEditMod &&
-        <div className={classes.email}>
-          <div>{emailValue}</div>
+        <Box display='flex' justifyContent='space-between' alignItems='center'
+          sx={{ width: '100%', height: 50, marginBottom: 2 }}>
+          <TextField
+            disabled
+            value={emailValue}
+            variant="standard"
+            sx={{ width: '176px' }}
+          />
           <Button onClick={() => {
             setEmailEditMode(true);
             setEmailValue('');
             setError('');
           }} size="small"
-            variant="contained" sx={{ marginLeft: 2 }}>Change email</Button>
-        </div>}
+            sx={{ marginLeft: 2 }}
+            variant="contained">Change email</Button>
+        </Box>}
 
       {emailEditMod &&
-        <div className={classes.email}>
+        <Box display='flex' justifyContent='space-between' alignItems='center'
+          sx={{ height: 50, marginBottom: 2 }}>
           <TextField label="Enter new email"
             variant="standard"
             onChange={(e) => setEmailValue(e.target.value)}
@@ -85,8 +92,8 @@ const EmailBlock: FC = () => {
             if (user?.email) setEmailValue(user?.email);
             setError('');
           }}
-            size="small" variant="contained" sx={{ marginLeft: 2 }}>Canсel</Button>
-        </div>}
+            size="small" variant="contained" sx={{ marginLeft: 1 }}>Canсel</Button>
+        </Box>}
     </>
   )
 }

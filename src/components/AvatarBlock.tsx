@@ -4,7 +4,7 @@ import defaultAvatar from '../assets/avatar-default-icon.png';
 
 const AvatarBlock: FC = () => {
   return (
-    <Avatar src={defaultAvatar} sx={{ width: 300, height: 300 }}></Avatar>
+    <Avatar src={defaultAvatar} sx={{ width: 250, height: 250 }}></Avatar>
   )
 }
 

@@ -1,12 +1,13 @@
 .wrap {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  align-items: center;
+  padding: 15px 10px;
   background-color: #2d2b34;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 25px;
   font-weight: bold;
   color: #fff;
 }
